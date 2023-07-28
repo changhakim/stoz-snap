@@ -1,0 +1,14 @@
+* { margin: 0; padding: 0; } 
+
+a { text-decoration: none; } 
+
+.test { display: block; background-color: yellow; } 
+.test:hover { background-color: #ccc; } 
+
+.a { color: red; } 
+.a ul { list-style-type: none; border: 1px solid #000; } 
+.a ul > li { background-color: pink; } 
+.a ul > li a:hover { color: #000; } /*# sourceMappingURL=main.css.map */
+div{}
+
+a12  
