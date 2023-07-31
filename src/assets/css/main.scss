@@ -1,0 +1,184 @@
+@font-face {
+	font-family: "NotoSansKr";
+	src: 	url('./font/NotoSansKR-Regular.otf') format('opentype');
+	font-weight: 400;
+	font-style: normal;
+}
+@font-face {
+	font-family: "NotoSansKr";
+	src: 	url('./font/NotoSansKR-Bold.otf') format('opentype');
+	font-weight: 700;
+	font-style: normal;
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+  box-sizing: border-box;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+button{border: none;}
+input{box-sizing: border-box; font-family: 'NotoSansKr';}
+input::-webkit-input-placeholder {
+  color: #a2aeb2;
+}
+input:-ms-input-placeholder {
+  color: #a2aeb2;
+}
+textarea{resize: none; box-sizing: border-box; font-family: 'NotoSansKr';}
+textarea::-webkit-input-placeholder {
+  color: #a2aeb2;
+}
+textarea:-ms-input-placeholder {
+  color: #a2aeb2;
+}
+
+@mixin pos_center {
+	position: absolute; top: 50%; transform: translateY(-50%);
+}
+@mixin ovh_ti {
+	overflow: hidden; text-indent: -9999px;
+}
+@mixin clb {
+	&::after{display: block; content: ''; clear: both;}
+}
+
+html{height: 100%;}
+body{height: 100%;}
+body{color: #000; font-size: 16px; font-family: NotoSansKr, sans-serif; font-weight: 400; line-height: 1.6;}
+input[type=text]{padding: 0 4px; box-sizing: border-box;}
+
+#wrap{display: flex; flex-direction: column; min-width: 1280px; height: 100%;}
+#header{
+  flex-shrink: 0; position: relative; height: 50px; border-bottom: 1px solid #cacfd8;
+	.btn-menu{
+		@include ovh_ti;
+		display: block; position: absolute; left: 40px; top: 13px; width: 24px; height: 24px; background: url(../img/ico_menu.png) 0 0 / 100% auto no-repeat;
+	}
+  .header-tit{padding: 14px 0 0 120px; color: #000; font-size: 16px; font-weight: 700; line-height: 1.2;}
+}
+#main{flex-grow: 1;}
+
+.main-cont-wrap{
+	overflow: hidden; position: relative; height: 100%;
+}
+.main-cont{
+	display: flex; flex-wrap: nowrap; height: 100%;
+  .cont-left{flex-shrink: 0; overflow-y: auto; position: relative; width: 1070px;}
+	.left-inner{padding: 20px 40px 60px 40px;}
+	.btn-main-cont{position: absolute; left: 1070px; top: 50%; margin: -15px 0 0 -25px; z-index: 10; width: 50px; height: 30px;}
+  .cont-right{flex-shrink: 0; overflow-y: auto; width: 1000px; background-color: #f5f5f5;}
+	.right-inner{padding: 20px 40px 60px 40px;}
+}
+
+.ird-wrap{
+	position: relative; font-size: 14px; line-height: 1;
+	input[type=radio]{opacity: 0; position: absolute; left: 0; top: 0; z-index: -10; width: 1px; height: 1px;}
+	.ird-ico{
+		position: absolute; left: 0; top: 50%; z-index: 1; width: 16px; height: 16px; transform: translateY(-50%) rotate(-90deg); transform-origin: center;
+		svg{width: 100%; height: 100%;}
+	}
+	label{display: inline-block; position: relative; z-index: 2; padding-left: 20px; line-height: 1.5;}
+	input[type=radio]:checked ~ .ird-ico .ico-c02{animation: ird_checked02 0.3s  forwards;}
+	input[type=radio]:checked ~ .ird-ico .ico-c03{animation: ird_checked 0.3s 0.3s forwards;}
+	input[type=radio]:disabled ~ .ird-ico .ico-c01{stroke: #999; fill: #ddd;}
+}
+
+@keyframes ird_checked {
+	100%{
+		stroke-dashoffset: 0;
+	}
+}
+@keyframes ird_checked02 {
+	90%{
+		r: 6
+	}
+	100%{
+		r: 4
+	}
+}
+
+.srh-cont{
+	position: relative;
+	.srh-tit{position: relative; z-index: 10; padding: 13px 24px 36px 30px; border-radius: 24px 24px 0 0; color: #000; font-size: 16px; font-weight: 700; line-height: 1.3; background-color: #f5f5f5;}
+	.src-itxt-wrap{
+		position: relative; z-index: 20; margin-top: -23px; padding: 10px 60px 10px 28px; border: 1px solid #cacfd8; border-radius: 40px; background-color: #fff;
+		input{width: 100%; height: 26px; border: none; font-size: 14px;}
+		.btn-srh{
+			@include ovh_ti;
+			@include pos_center;
+			right: 30px; width: 24px; height: 24px; background: url(../img/ico_search.png) 0 0 / 100% auto no-repeat;
+		}
+	}
+}
+
+.ird-cont{
+	@include clb;
+	position: relative; margin-top: 16px; padding-right: 60px;
+	.ird-wrap{
+		float: left; margin-left: 10px;
+		&:first-child{margin-left: 0;}
+	}
+	.btn-lpop-detail{
+		@include ovh_ti;
+		@include pos_center;
+		display: block; right: 30px; width: 24px; height: 24px; background: url(../img/ico_detail.png) 0 0 / 100% auto no-repeat;
+	}
+}
+
+.result-help{
+	display: flex; flex-direction: column; align-items: center; padding: 80px 0;
+	.help-tit{margin-bottom: 30px; color: #000; font-size: 20px; font-weight: 700; line-height: 1.4;}
+	.help-list-wrap{
+		.help-list{
+			> li{
+				position: relative; padding-left: 22px; line-height: 1.5;
+				.mark{position: absolute; left: 0; top: 0;}
+			}
+		}
+	}
+}
+
+.tarea-cont{
+	.cont-tit{margin-bottom: 10px; color: #000; font-size: 16px; width: 500px;}
+	textarea{width: 100%; height: 170px; padding: 20px 30px; border: 2px solid #cacfd8; border-radius: 16px; font-size: 16px;}
+}
+

@@ -4,15 +4,9 @@
       <div class="main-cont-wrap">
         <div class="main-cont">
           <div class="cont-left">
-            <div class="test">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <circle cx="10" cy="10" r="9" stroke="#1DC9A0" stroke-width="1px" fill="#ccc"/>
-                <circle cx="10" cy="10" r="5" fill="#1DC9A0"/>
-              </svg>
-            </div>
-            <stoz-main-left @news_click="bindNews"></stoz-main-left>
-            <button class="btn-main-cont">이동</button>
+            <stoz-main-left @news_click="bindNews" @mainradio_click="fnMoveNext"></stoz-main-left>
           </div>
+          <button class="btn-main-cont">이동</button>
           <div class="cont-right">
             <stoz-main-right :newsObj="newsContent"></stoz-main-right>
           </div>
@@ -31,7 +25,7 @@ import transition from 'jquery.transit';
     let isMainContMove = false;
     let curMainView = 'left';
     onMounted(()=>{
-        $('.btn-main-cont').off('click.stoz').on('click.stoz', function(){
+      $('.btn-main-cont').off('click.stoz').on('click.stoz', function(){
         if(isMainContMove == false) {
           if(curMainView == 'left') {
             fnMoveNext();
@@ -39,12 +33,16 @@ import transition from 'jquery.transit';
             fnMovePrev();
           }
         }
-      })
+      });
     })
     function fncScrollTop(){
       $('html,body').animate({scrollTop:0},1000)
     }
-    function fnMoveNext() {
+    function fnMoveNext(cb) {
+      if(curMainView == 'right') {
+        return;
+      }
+
       isMainContMove = true
       $('.main-cont').stop().transition({
         x: -790,
@@ -53,11 +51,17 @@ import transition from 'jquery.transit';
         complete: function() {
           isMainContMove = false;
           curMainView = 'right';
+          if(cb && typeof cb == 'function') {
+            cb();
+          }
         }
       });
-      fncScrollTop();
-    };
-    function fnMovePrev() {
+    }
+    function fnMovePrev(cb) {
+      if(curMainView == 'left') {
+        return;
+      }
+
       isMainContMove = true
       $('.main-cont').stop().transition({
         x: 0,
@@ -66,11 +70,15 @@ import transition from 'jquery.transit';
         complete: function() {
           isMainContMove = false;
           curMainView = 'left';
+          if(cb && typeof cb == 'function') {
+            cb();
+          }
         }
       });
-      fncScrollTop();
     }
     // 추후 vue transition으로 수정 예정
+
+    //기사 클릭 시 오른쪽 화면으로 이동 및 컴포넌트에 데이터 전달 
     const bindNews = (obj)=>{
       fnMoveNext();
       newsContent.value = obj;
