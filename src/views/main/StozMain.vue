@@ -1,5 +1,5 @@
 <template>
-    <stoz-header></stoz-header>
+    <stoz-header @click-header="clickHeader"></stoz-header>
     <main id="main">
       <div class="main-cont-wrap">
         <div class="main-cont">
@@ -16,8 +16,7 @@
 </template>
 <script setup>
 import { onMounted,ref } from 'vue';
-import StozHeader from '@/layouts/header/StozHeader.vue';
-import {StozMainLeft,StozMainRight} from './'
+import {StozHeader,StozMainLeft,StozMainRight} from './'
 import $ from 'jquery';
 import transition from 'jquery.transit';
     const newsContent = ref({})
@@ -39,6 +38,7 @@ import transition from 'jquery.transit';
       $('html,body').animate({scrollTop:0},1000)
     }
     function fnMoveNext(cb) {
+      fncScrollTop();
       if(curMainView == 'right') {
         return;
       }
@@ -83,5 +83,9 @@ import transition from 'jquery.transit';
       fnMoveNext();
       newsContent.value = obj;
       console.log(newsContent.value)
+    }
+    //헤더 클릭시 진입 화면 이동 및 검색어 초기화
+    const clickHeader = ()=>{
+      fnMovePrev();
     }
 </script>

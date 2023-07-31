@@ -1,6 +1,7 @@
+import StozHeader from './StozHeader.vue';
 import StozMainLeft from './StozMainLeft.vue';
 import StozMainRight from './StozMainRight.vue';
 
 
-export {StozMainLeft,StozMainRight}
+export {StozHeader,StozMainLeft,StozMainRight}
 
